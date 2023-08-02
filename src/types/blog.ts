@@ -13,4 +13,4 @@ export type Blog = {
 
 export type BlogMeta = Omit<Blog, "content">;
 
-export type BlogList = Blog[];
+export type BlogList = BlogMeta[];

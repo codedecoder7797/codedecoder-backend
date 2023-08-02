@@ -3,12 +3,12 @@ import type { RequestHandler } from "express";
 
 import { getPageBySlug, getPageContent, getPages } from "../lib/notion";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import type { Blog, BlogMeta } from "../types/blog";
+import type { Blog, BlogList } from "../types/blog";
 
 export const getBlogs: RequestHandler = async (req, res) => {
   try {
     const posts = await getPages();
-    const blogs: BlogMeta[] = posts.results.map((post) => {
+    const blogs: BlogList = posts.results.map((post) => {
       const blog = post as PageObjectResponse;
       return {
         id: blog.id,
