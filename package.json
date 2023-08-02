@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "node build/server.js",
     "build": "yarn tsc",
-    "dev":"yarn nodemon src/server.ts"
+    "dev":"yarn nodemon src/server.ts",
+    "start:prod":"yarn build && yarn start"
   },
 
   "dependencies": {
