@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { RequestHandler } from "express";
+import { RequestHandler } from "express";
+import { getPages, getPageBySlug } from "../lib/notion";
+import { PcBuildDbID } from "../lib/notion/constants";
+import { mapBlogs, mapSlugs, mapPost, mapSiteMaps } from "../utils/blogs";
 
-import { getPageBySlug, getPages } from "../lib/notion";
-import { BlogDbID } from "../lib/notion/constants";
-import { mapBlogs, mapPost, mapSiteMaps, mapSlugs } from "../utils/blogs";
-
-const DB_ID = BlogDbID;
+const DB_ID = PcBuildDbID;
 
 export const getBlogs: RequestHandler = async (req, res) => {
   try {

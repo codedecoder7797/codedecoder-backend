@@ -8,21 +8,25 @@ export const notionClient = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-export const getPages = () => {
-  return notionClient.databases.query({
-    filter: {
-      property: "Status",
-      status: {
-        equals: "published",
+export const getPages = (dbId: string) => {
+  try {
+    return notionClient.databases.query({
+      filter: {
+        property: "Status",
+        status: {
+          equals: "published",
+        },
       },
-    },
-    database_id: process.env.NOTION_DATABASE_ID!,
-  });
+      database_id: dbId,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const getPageBySlug = async (slug: string) => {
+export const getPageBySlug = async (slug: string, dbId: string) => {
   const response = await notionClient.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID!,
+    database_id: dbId,
     filter: {
       property: "Slug",
       rich_text: {
