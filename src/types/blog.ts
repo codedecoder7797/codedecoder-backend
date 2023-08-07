@@ -9,8 +9,9 @@ export type Blog = {
   content: BlockObjectResponse[];
   slug: string;
   description: string;
+  bannerImageBlur: string;
 };
 
-export type BlogMeta = Omit<Blog, "content">;
+export type BlogMeta = Omit<Blog, "content" | "bannerImageBlur">;
 
 export type BlogList = BlogMeta[];

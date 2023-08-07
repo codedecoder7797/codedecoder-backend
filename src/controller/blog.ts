@@ -65,10 +65,27 @@ export const getBlogBySlug: RequestHandler = async (req, res) => {
       slug:
         ((post?.properties.Slug as any).rich_text[0].plain_text as string) ||
         "",
+      bannerImageBlur: (post.properties.ImageBlurUrl as any).url as string,
     };
 
     return res.status(200).json(blog);
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getSitemaps: RequestHandler = async (req, res) => {
+  const posts = await getPages();
+  const slugs = posts.results.map((post) => {
+    const blog = post as PageObjectResponse;
+    return {
+      slug:
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((blog?.properties.Slug as any).rich_text[0].plain_text as string) ||
+        "",
+      date: blog.last_edited_time,
+    };
+  });
+
+  return res.status(200).json(slugs);
 };

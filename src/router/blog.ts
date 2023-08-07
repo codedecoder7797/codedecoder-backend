@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", authRouter, BlogController.getBlogs);
 router.get("/slug", authRouter, BlogController.getSlugs);
+router.get("/sitemap", authRouter, BlogController.getSitemaps);
 router.get("/:slug", authRouter, BlogController.getBlogBySlug);
 
 export { router as blogRouter };
